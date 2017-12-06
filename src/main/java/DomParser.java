@@ -49,7 +49,7 @@ public class DomParser implements EmployeeStorable {
 
     public List<Employee> read() {
         List<Employee> items = new ArrayList<Employee>();
-        NodeList list = document.getElementsByTagName("human");
+        NodeList list = document.getElementsByTagName("employee");
         for (int i = 0; i < list.getLength(); i++) {
             Node item = list.item(i);
             Element element = (Element) item;
@@ -88,25 +88,14 @@ public class DomParser implements EmployeeStorable {
 
         return element;
     }
-
+    @Override
     public void addEmployee(Employee employee) {
         Element root = (Element) document.getFirstChild();
         root.appendChild(setElementByHuman(employee));
         save();
     }
-
+    @Override
     public void delEmployee(Employee employee) {
-        NodeList list = document.getElementsByTagName("employee");
-        for (int i = 0; i < list.getLength(); i++) {
-            Element element = (Element) list.item(i);
-            String lastName = element.getElementsByTagName("lastName").item(0).getTextContent();
-            if (employee.getLastName().equals(lastName))
-                element.getParentNode().replaceChild(setElementByHuman(employee), element);
-        }
-        save();
-    }
-
-    public void changeInfo(Employee employee) {
         NodeList list = document.getElementsByTagName("employee");
         for (int i = 0; i < list.getLength(); i++) {
             Element element = (Element) list.item(i);
@@ -116,7 +105,18 @@ public class DomParser implements EmployeeStorable {
         }
         save();
     }
-
+    @Override
+    public void changeInfo(Employee employee) {
+        NodeList list = document.getElementsByTagName("employee");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element element = (Element) list.item(i);
+            String lastName = element.getElementsByTagName("lastName").item(0).getTextContent();
+            if (employee.getLastName().equals(lastName))
+                element.getParentNode().replaceChild(setElementByHuman(employee), element);
+        }
+        save();
+    }
+    @Override
     public Employee findEmployeeByLastName(String lastName) {
         Employee employee = null;
         NodeList list = document.getElementsByTagName("employee");
