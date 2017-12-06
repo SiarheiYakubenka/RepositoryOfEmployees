@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<employees>
+    <employee>
+        <firstName>Pavel</firstName>
+        <lastName>Ivanov</lastName>
+        <age>23</age>
+        <experience>4</experience>
+    </employee>
+    <employee>
+        <firstName>Roman</firstName>
+        <lastName>Petrov</lastName>
+        <age>23</age>
+        <experience>4</experience>
+    </employee>
+    <employee >
+        <firstName>Ivan</firstName>
+        <lastName>Vasilyev</lastName>
+        <age>25</age>
+        <experience>5</experience>
+    </employee>
+    <employee >
+        <firstName>Sergey</firstName>
+        <lastName>Sidorov</lastName>
+        <age>18</age>
+        <experience>4</experience>
+    </employee>
+    <employee>
+        <firstName>Elena</firstName>
+        <lastName>Petrova</lastName>
+        <age>19</age>
+        <experience>2</experience>
+    </employee>
+</employees>

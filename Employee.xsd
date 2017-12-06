@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="employees">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="firstName" maxOccurs="1" minOccurs="1"></xs:element>
+                            <xs:element name="lastName" maxOccurs="1" minOccurs="1"></xs:element>
+                            <xs:element name="age" maxOccurs="1" minOccurs="1" type="xs:integer"></xs:element>
+                            <xs:element name="experience" maxOccurs="1" minOccurs="0" type="xs:integer"></xs:element>
+
+                            <!--<xs:element name="phoneNumber" minOccurs="0" maxOccurs="unbounded">-->
+                                <!--<xs:complexType>-->
+                                    <!--<xs:attribute name="Number">-->
+                                        <!--<xs:simpleType>-->
+                                            <!--<xs:restriction base="xs:string">-->
+                                                <!--<xs:pattern value="\S?\S\d{1,5}\S\d{3}-\d{2}-\d{2}"></xs:pattern>-->
+                                            <!--</xs:restriction>-->
+                                        <!--</xs:simpleType>-->
+                                    <!--</xs:attribute>-->
+                                    <!--<xs:attribute name="Type">-->
+                                        <!--<xs:simpleType>-->
+                                            <!--<xs:restriction base="xs:string">-->
+                                                <!--<xs:enumeration value="home"/>-->
+                                                <!--<xs:enumeration value="work"/>-->
+                                                <!--<xs:enumeration value="mobile"/>-->
+                                            <!--</xs:restriction>-->
+                                        <!--</xs:simpleType>-->
+                                    <!--</xs:attribute>-->
+                                <!--</xs:complexType>-->
+                            <!--</xs:element>-->
+                            <!--<xs:element name="Note" minOccurs="1" maxOccurs="unbounded">-->
+                                <!--<xs:complexType>-->
+                                    <!--<xs:sequence>-->
+                                        <!--<xs:element name="String" minOccurs="1" maxOccurs="1" type="xs:string"></xs:element>-->
+                                        <!--<xs:element name="Tag" minOccurs="1" maxOccurs="unbounded" type="xs:string"></xs:element>-->
+                                    <!--</xs:sequence>-->
+                                <!--</xs:complexType>-->
+                            <!--</xs:element>-->
+                            <!--<xs:element name="date" minOccurs="1" maxOccurs="1" type="xs:dateTime">-->
+                                <!--<xs:complexType>-->
+                                    <!--<xs:attribute name="Date" type="xs:dateTime"></xs:attribute>-->
+                                <!--</xs:complexType>-->
+                            <!--</xs:element>-->
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
