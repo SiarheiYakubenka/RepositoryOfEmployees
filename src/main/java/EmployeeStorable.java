@@ -1,3 +1,4 @@
+
 public interface EmployeeStorable {
     void addEmployee(Employee employee);
     void delEmployee(Employee employee);

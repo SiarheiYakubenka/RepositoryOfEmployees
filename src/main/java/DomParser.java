@@ -24,9 +24,6 @@ import java.util.List;
 
 public class DomParser implements EmployeeStorable {
     private static final String XSD_PATH = "Employee.xsd";
-    private static final String HUMANS = "/employees/employee";
-    private static final String ROOT = "/employees";
-    private static final String END_EXPRESSION = "']";
 
     private String path;
     private Document document;
@@ -39,7 +36,7 @@ public class DomParser implements EmployeeStorable {
             DocumentBuilderFactory dbFactory
                     = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            document = (Document) dBuilder.parse(inputFile);
+            document = dBuilder.parse(inputFile);
             xPath = XPathFactory.newInstance().newXPath();
             this.path = path;
         }
@@ -129,9 +126,9 @@ public class DomParser implements EmployeeStorable {
         return employee;
     }
 
-    public void save() {
+    private void save() {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = null;
+        Transformer transformer;
         try {
             transformer = transformerFactory.newTransformer();
 
