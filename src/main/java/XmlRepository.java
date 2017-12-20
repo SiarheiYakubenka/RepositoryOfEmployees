@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DomParser implements EmployeeStorable {
+public class XmlRepository implements EmployeeStorable {
     private static final String XSD_PATH = "Employee.xsd";
 
     private String path;
@@ -30,7 +30,7 @@ public class DomParser implements EmployeeStorable {
 
     private XPath xPath;
 
-    public DomParser(String path) throws IOException, ParserConfigurationException, SAXException {
+    public XmlRepository(String path) throws IOException, ParserConfigurationException, SAXException {
         if (XsdValidation.validateAgainstXSD(new FileInputStream(path), new FileInputStream(XSD_PATH))) {
             File inputFile = new File(path);
             DocumentBuilderFactory dbFactory
