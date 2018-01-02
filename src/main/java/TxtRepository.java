@@ -1,22 +1,29 @@
-import javax.swing.text.html.parser.Parser;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TxtRepository implements EmployeeStorable {
 
 
-    File openedFile = new File("Repository.txt");
+    File file;
 
+    public TxtRepository(File file){
+        if (file == null){
+            throw new IllegalArgumentException("Отсутствует ссылка на файл");
+        }
+
+        if (file.isDirectory() || !file.exists()){
+            throw new IllegalArgumentException("Файл отсутствует или является пакой");
+        }
+        this.file = file;
+    }
 
     @Override
     public void addEmployee(Employee employee)  {
-        File openedFile = new File("Repository.txt");
         try {
-            FileWriter writer = new FileWriter(openedFile, true);
+            FileWriter writer = new FileWriter(file, true);
             writer.write(employee.toString() + "\r\n");
             writer.flush();
             writer.close();
@@ -30,7 +37,6 @@ public class TxtRepository implements EmployeeStorable {
 
         StringBuilder newFile = new StringBuilder();
         List<String> employees = new ArrayList<>();
-        File file = new File("Repository.txt");
 
         try {
 
@@ -68,7 +74,7 @@ public class TxtRepository implements EmployeeStorable {
         }
 
         try {
-            FileWriter fileWriter = new FileWriter("Repository.txt");
+            FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(String.valueOf(newFile));
             fileWriter.flush();
             fileWriter.close();
@@ -85,7 +91,6 @@ public class TxtRepository implements EmployeeStorable {
 
         StringBuilder newFile = new StringBuilder();
         List<String> employees = new ArrayList<>();
-        File file = new File("Repository.txt");
 
         try {
 
@@ -125,7 +130,7 @@ public class TxtRepository implements EmployeeStorable {
         }
 
         try {
-            FileWriter fileWriter = new FileWriter("Repository.txt");
+            FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(String.valueOf(newFile));
             fileWriter.flush();
             fileWriter.close();
@@ -142,38 +147,23 @@ public class TxtRepository implements EmployeeStorable {
         Employee employee = new Employee();
         employee.setLastName(lastName);
         try {
-            FileReader fileReader = new FileReader(openedFile);
+            FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-
             String line = bufferedReader.readLine();
-            String newline;
 
-            Pattern pattern = Pattern.compile("Employee[^}]*}");
-            Pattern pattern1 = Pattern.compile(lastName);
-            Pattern pattern2 = Pattern.compile("firstName='[^']*'");
-            Pattern pattern3 = Pattern.compile("(?>age=)\\d+");
-            Pattern pattern4 = Pattern.compile("experience=[\\d]*'");
+            Pattern pattern = Pattern.compile("Employee\\{firstName='([^']*)', lastName='([^']*)', age=([^']*)" +
+                    ", experience=([^']*)}");
             Matcher matcher =  pattern.matcher(line);
-            Matcher matcher1, matcher2, matcher3, matcher4;
-
-
 
             while (line != null){
 
                 while (matcher.find()){
-                    matcher1 = pattern1.matcher(matcher.group());
-                    if (matcher1.find()){
-                        newline = matcher.group();
-                        matcher2 = pattern2.matcher(newline);
-                        matcher3 = pattern3.matcher(newline);
-                        matcher4 = pattern4.matcher(newline);
-                        if (matcher3.find()){
-                            employee.setAge(Integer.parseInt(matcher3.group()));
-                        }
+                    if (matcher.group(2).equals(lastName)){
+                        employee.setFirstName(matcher.group(1));
+                        employee.setAge(Integer.parseInt(matcher.group(3)));
+                        employee.setExperience(Integer.parseInt(matcher.group(4)));
 
-
-
-
+                        return employee;
                     }
                 }
                 line = bufferedReader.readLine();
